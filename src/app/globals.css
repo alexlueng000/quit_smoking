@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --canvas: #f2f5f0;
+  --surface: #ffffff;
+  --ink: #17221c;
+  --muted: #66736c;
+  --line: #dfe6df;
+  --brand: #176b4d;
+  --brand-deep: #0d4936;
+  --brand-soft: #dfeee6;
+  --warm: #f0b676;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--canvas);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 90% -10%, rgba(144, 190, 164, 0.2), transparent 30rem),
+    radial-gradient(circle at -10% 34%, rgba(240, 182, 118, 0.1), transparent 24rem),
+    var(--canvas);
+  color: var(--ink);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(23, 107, 77, 0.24);
+  outline-offset: 3px;
+}
+
+button:active,
+a:active {
+  transform: translateY(1px);
+}
+
+::selection {
+  background: #c9e4d6;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.58; }
+    50% { transform: scale(1.08); opacity: 0.82; }
+  }
+
+  .breathe-orbit {
+    animation: breathe 4.5s ease-in-out infinite;
+  }
+}

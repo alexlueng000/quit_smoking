@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum QuitStatus {
+  NOT_STARTED
+  REDUCING
+  QUIT
+}
+
+enum TriggerType {
+  STRESS
+  AFTER_MEAL
+  ALCOHOL
+  SOCIAL
+  BOREDOM
+  HABIT
+  NEGATIVE_MOOD
+  OTHER
+}
+
+enum CravingStatus {
+  STARTED
+  INTERVENING
+  COMPLETED
+  ABANDONED
+}
+
+enum InterventionStrategy {
+  BREATHING
+  DELAY_DECISION
+  URGE_SURFING
+  BEHAVIOR_REPLACEMENT
+  GROUNDING
+  REFUSAL_REHEARSAL
+  COGNITIVE_REFRAME
+  RELAPSE_REVIEW
+}
+
+model User {
+  id              String           @id @default(cuid())
+  anonymousId     String           @unique @map("anonymous_id")
+  email           String?          @unique
+  displayName     String?          @map("display_name")
+  locale          String           @default("zh-CN")
+  timezone        String           @default("Asia/Shanghai")
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+  profile         Profile?
+  profileTriggers ProfileTrigger[]
+  cravingEvents   CravingEvent[]
+  dailyLogs       DailyLog[]
+  analyticsEvents AnalyticsEvent[]
+
+  @@map("users")
+}
+
+model Profile {
+  id                      String     @id @default(cuid())
+  userId                  String     @unique @map("user_id")
+  cigarettesPerDay        Int        @map("cigarettes_per_day")
+  smokingYears            Int        @map("smoking_years")
+  minutesToFirstCigarette Int        @map("minutes_to_first_cigarette")
+  quitAttempts            Int        @map("quit_attempts")
+  motivation              String
+  quitStatus              QuitStatus @map("quit_status")
+  quitDate                DateTime?  @map("quit_date") @db.Date
+  currency                String     @default("CNY")
+  cigarettePackPrice      Decimal?   @map("cigarette_pack_price") @db.Decimal(10, 2)
+  cigarettesPerPack       Int        @default(20) @map("cigarettes_per_pack")
+  createdAt               DateTime   @default(now()) @map("created_at")
+  updatedAt               DateTime   @updatedAt @map("updated_at")
+  user                    User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model ProfileTrigger {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  triggerType TriggerType @map("trigger_type")
+  priority    Int
+  createdAt   DateTime    @default(now()) @map("created_at")
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, triggerType])
+  @@index([userId, priority])
+  @@map("profile_triggers")
+}
+
+model CravingEvent {
+  id                String                @id @default(cuid())
+  userId            String                @map("user_id")
+  triggerType       TriggerType           @map("trigger_type")
+  contextText       String?               @map("context_text") @db.VarChar(300)
+  beforeScore       Int                   @map("before_score")
+  afterScore        Int?                  @map("after_score")
+  primaryStrategy   InterventionStrategy? @map("primary_strategy")
+  smoked            Boolean?
+  status            CravingStatus         @default(STARTED)
+  startedAt         DateTime              @default(now()) @map("started_at")
+  completedAt       DateTime?             @map("completed_at")
+  durationSeconds   Int?                  @map("duration_seconds")
+  createdAt         DateTime              @default(now()) @map("created_at")
+  updatedAt         DateTime              @updatedAt @map("updated_at")
+  user              User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interventionSteps InterventionStep[]
+
+  @@index([userId, startedAt])
+  @@index([status])
+  @@map("craving_events")
+}
+
+model InterventionStep {
+  id             String               @id @default(cuid())
+  cravingEventId String               @map("craving_event_id")
+  stepIndex      Int                  @map("step_index")
+  strategy       InterventionStrategy
+  actionType     String               @map("action_type")
+  aiMessage      String               @map("ai_message")
+  userResponse   String?              @map("user_response") @db.VarChar(300)
+  modelProvider  String?              @map("model_provider")
+  modelName      String?              @map("model_name")
+  latencyMs      Int?                 @map("latency_ms")
+  tokenInput     Int?                 @map("token_input")
+  tokenOutput    Int?                 @map("token_output")
+  createdAt      DateTime             @default(now()) @map("created_at")
+  cravingEvent   CravingEvent         @relation(fields: [cravingEventId], references: [id], onDelete: Cascade)
+
+  @@unique([cravingEventId, stepIndex])
+  @@map("intervention_steps")
+}
+
+model DailyLog {
+  id               String   @id @default(cuid())
+  userId           String   @map("user_id")
+  logDate          DateTime @map("log_date") @db.Date
+  cigarettesSmoked Int      @map("cigarettes_smoked")
+  notes            String?  @db.VarChar(500)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, logDate])
+  @@map("daily_logs")
+}
+
+model AnalyticsEvent {
+  id             String   @id @default(cuid())
+  userId         String?  @map("user_id")
+  anonymousId    String?  @map("anonymous_id")
+  eventName      String   @map("event_name")
+  propertiesJson Json     @default("{}") @map("properties_json")
+  createdAt      DateTime @default(now()) @map("created_at")
+  user           User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([eventName, createdAt])
+  @@index([anonymousId, createdAt])
+  @@map("analytics_events")
+}

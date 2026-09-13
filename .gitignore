@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+
+# Next.js
+/.next
+/out
+
+# tests
+/coverage
+/playwright-report
+/test-results
+/backups
+
+# environment and secrets
+.env
+.env.*
+!.env.example
+
+# Prisma local databases
+*.db
+*.db-journal
+
+# editors and operating systems
+.DS_Store
+*.swp
+
+# local AI/tool memory
+/.workbuddy/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
