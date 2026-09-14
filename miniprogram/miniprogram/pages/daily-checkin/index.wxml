@@ -1,7 +1,7 @@
 <view class="page">
   <view class="eyebrow">{{date}} · 每日记录</view><view class="title">简单回顾今天</view><view class="subtitle">如实记录即可，不评判，也不会清零。</view>
   <block wx:if="{{ready}}">
-    <view class="section"><label class="field-label" for="count">今天一共抽了多少支？</label><input id="count" class="field" type="number" value="{{count}}" bindinput="count" placeholder="没有抽请填 0，最多 200 支" /></view>
+    <view class="section"><label class="field-label" for="count">今天一共抽了多少支？</label><input id="count" class="field" type="number" value="{{count}}" bindinput="count" placeholder="没有抽请填 0，最多 200 支" placeholder-class="count-placeholder" /></view>
     <view class="section"><label class="field-label" for="notes">今天最难的时刻（可不填）</label><textarea id="notes" class="field" maxlength="500" value="{{notes}}" bindinput="notes" placeholder="例如：晚饭后和朋友聊天时" /><view class="hint">{{notes.length}} / 500</view></view>
     <view wx:if="{{saved}}" class="success">今天的记录已保存，再次提交会更新同一条记录。</view>
     <button class="primary" bindtap="save" disabled="{{saving}}" loading="{{saving}}" hover-class="pressed">{{saved ? '更新今日记录' : '保存今日记录'}}</button>

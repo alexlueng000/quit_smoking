@@ -4,7 +4,13 @@
 .onboarding-page .wide-field { grid-column: 1 / -1; }
 .onboarding-page .field-label { font-size: 13px; margin-bottom: 6px; }
 .onboarding-page .field, .onboarding-page .picker { min-height: 44px; padding: 10px 12px; font-size: 14px; line-height: 22px; }
-.onboarding-page input.field { height: 44px; }
+.onboarding-page input.field {
+  height: 44px;
+  min-height: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 44px;
+}
 .onboarding-page .options { margin-top: 8px; }
 .onboarding-page .form-actions { display: flex; gap: 12px; margin-top: 16px; }
 .onboarding-page .form-actions .primary { flex: 1; width: auto; margin: 0; }
