@@ -1,0 +1,18 @@
+<view class="page compact-page">
+  <view class="eyebrow">给这一次留个记录</view><view class="title">{{completed ? '这次记录完成了' : '现在感觉怎么样？'}}</view>
+  <view class="subtitle">{{completed ? '无论结果怎样，这都是一条有价值的真实记录。' : '没有改善也没关系，记录实际感受就好。'}}</view>
+  <block wx:if="{{ready}}">
+    <view wx:if="{{completed}}" class="section completion"><view class="completion-mark" aria-hidden="true">✓</view>
+      <view class="success">开始 {{before}} 分 → 现在 {{score}} 分</view><view class="section-title section">{{outcome === 'not_smoked' ? '这次没有抽' : outcome === 'smoked' ? '这次抽了' : '结果还不确定'}}</view><button class="primary" bindtap="home" hover-class="pressed">回到首页</button>
+    </view>
+    <block wx:else>
+      <view class="score-panel"><view class="row"><view class="muted">开始时 {{before}} 分</view><view class="score">{{score}}</view></view><slider min="0" max="10" step="1" value="{{score}}" activeColor="#176b4d" block-color="#176b4d" bindchange="score" bindchanging="score" aria-label="干预后烟瘾评分，0 到 10" /><view class="score-ends"><text>0 · 完全不想</text><text>10 · 非常强烈</text></view></view>
+      <view class="section"><view class="section-title">这次最终怎么样？</view><view class="options"><button wx:for="{{outcomes}}" wx:key="value" class="option {{outcome === item.value ? 'selected' : ''}}" data-value="{{item.value}}" bindtap="outcome" hover-class="pressed" aria-label="{{item.label + (outcome === item.value ? '，已选择' : '，未选择')}}">{{item.label}}</button></view></view>
+      <button class="link note-toggle" bindtap="toggleFeedback">{{showFeedback ? '收起备注' : feedback ? '查看或修改备注' : '有什么想记下的？（可不填）'}}</button>
+      <view wx:if="{{showFeedback}}"><textarea id="feedback" class="field" value="{{feedback}}" bindinput="feedback" maxlength="300" placeholder="什么有帮助，或是什么让你觉得困难" aria-label="这次支持的备注" /><view class="hint">{{feedback.length}} / 300</view></view>
+      <button class="primary" bindtap="save" disabled="{{!outcome || saving}}" loading="{{saving}}" hover-class="pressed">保存这次记录</button>
+    </block>
+  </block>
+  <view wx:if="{{error}}" class="error">{{error}}<button wx:if="{{!ready}}" class="link" bindtap="load">重新读取</button></view>
+  <button wx:if="{{!completed}}" class="link" bindtap="home">返回首页，稍后记录</button>
+</view>

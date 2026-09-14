@@ -1,0 +1,8 @@
+.compact-page .context-actions { gap: 8px; margin-top: 8px; }
+.compact-page .context-actions .note-toggle { flex: 1; width: auto; margin: 0; font-size: 12px; }
+.compact-page .home-link { flex-shrink: 0; font-size: 12px; }
+.compact-page .score { font-size: 32px; }
+.compact-page .score-panel { display: flex; flex-wrap: wrap; align-items: center; }
+.compact-page .score-panel .score { width: 76px; text-align: left; }
+.compact-page .score-panel slider { flex: 1; width: auto; min-width: 0; }
+.compact-page .score-ends { width: 100%; margin-top: 4px; }

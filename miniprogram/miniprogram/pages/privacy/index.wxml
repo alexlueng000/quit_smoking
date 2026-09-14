@@ -1,0 +1,7 @@
+<view class="page"><view class="eyebrow">本地体验版 · 2026-09-14</view><view class="title">隐私说明</view>
+  <view class="section"><view class="section-title">保存什么</view><view>吸烟与戒烟档案、填写草稿、烟瘾触发场景、前后评分、是否吸烟、反馈、支持进度，以及每日吸烟数量和备注。</view></view>
+  <view class="section"><view class="section-title">数据在哪里</view><view>当前版本只使用此设备的小程序本地存储，不调用微信登录、不上传至业务服务器或外部 AI。支持内容来自本地预设步骤，不是 AI 实时生成。</view></view>
+  <view class="section"><view class="section-title">如何使用</view><view>用于恢复填写和支持进度、展示个人统计，并按触发场景选择预设支持步骤。不要求提供姓名、手机号或头像。</view></view>
+  <view class="section"><view class="section-title">保存与删除</view><view>记录会保留到你主动删除，或微信清理相应存储。更换设备、清除小程序数据可能导致记录丢失，目前没有云端备份。可在“数据与隐私”中删除此设备的全部记录。</view></view>
+  <view class="section"><view class="section-title">健康声明</view><view>本产品提供行为改变支持，不用于诊断或治疗，不能替代医生。出现严重身体不适时，请联系当地急救或专业医疗机构。</view></view>
+  <button class="primary" bindtap="home">回到首页</button></view>

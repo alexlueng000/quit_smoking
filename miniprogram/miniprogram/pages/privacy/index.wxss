@@ -1,0 +1,1 @@
+.page .section-title { font-size:16px; margin-bottom:8px; }.page .section { padding-bottom:24px; margin-top:24px; border-bottom:1px solid #e0e6d9; color:#53675a; font-size:14px; line-height:1.95; }.page .section-title { color:#294333; }

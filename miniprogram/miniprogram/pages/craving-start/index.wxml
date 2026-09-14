@@ -1,0 +1,13 @@
+<view class="page compact-page">
+  <view class="title">现在有多想抽烟？</view><view class="subtitle">没有标准答案，按当下的感觉来。</view>
+  <block wx:if="{{ready}}">
+    <view class="score-panel"><view class="score">{{score}}<text class="muted"> / 10</text></view><slider min="0" max="10" step="1" value="{{score}}" activeColor="#176b4d" backgroundColor="#dfe6df" block-color="#176b4d" bindchange="score" bindchanging="score" aria-label="当前烟瘾评分，0 到 10" /><view class="score-ends"><text>0 · 完全不想</text><text>10 · 非常强烈</text></view></view>
+    <view class="section"><view class="section-title">刚才是什么触发了烟瘾？</view><view class="options"><button wx:for="{{triggers}}" wx:key="value" class="option {{trigger === item.value ? 'selected' : ''}}" data-value="{{item.value}}" bindtap="trigger" hover-class="pressed" aria-label="{{item.label + (trigger === item.value ? '，已选择' : '，未选择')}}">{{item.label}}</button></view></view>
+    <view class="row context-actions"><button class="link note-toggle" bindtap="toggle">{{showContext ? '收起补充说明' : '补充一下刚才的情况（可不填）'}}</button><button class="link home-link" bindtap="home">返回首页</button></view>
+    <view wx:if="{{showContext}}"><textarea class="field" value="{{context}}" bindinput="context" maxlength="300" placeholder="例如：刚开完一个不太顺利的会议" aria-label="补充情况" /><view class="hint">{{context.length}} / 300</view></view>
+  </block>
+  <view wx:if="{{error}}" class="error">{{error}}</view>
+  <button wx:if="{{ready}}" class="primary" bindtap="start" disabled="{{saving || !trigger}}" loading="{{saving}}" hover-class="pressed">开始这次支持</button>
+  <view class="hint center">预设支持 · 本地体验</view>
+  <button wx:if="{{!ready}}" class="link" bindtap="home">返回首页</button>
+</view>

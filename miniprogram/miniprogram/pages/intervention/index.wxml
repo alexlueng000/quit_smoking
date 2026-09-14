@@ -1,0 +1,17 @@
+<view class="page compact-page intervention-page">
+  <block wx:if="{{event}}">
+    <view class="eyebrow">{{event.safety ? '请优先获得即时帮助' : '陪你度过这一阵 · ' + (event.stepIndex + 1) + ' / ' + event.steps.length}}</view>
+    <view class="title">{{title}}</view>
+    <view class="instruction">{{message}}</view>
+    <block wx:if="{{!event.safety}}">
+      <view class="timer"><view class="timer-face"><view class="timer-inner"><view class="clock">{{clock}}</view><view class="timer-caption">这一刻 · 慢慢来</view></view></view><view class="muted">{{remaining > 0 ? '按自己的节奏，不必盯着倒计时' : '这一步的时间到了，看看现在的感觉'}}</view></view>
+      <button wx:if="{{!last}}" class="primary" style="width: 100%;" bindtap="next" hover-class="pressed">准备好了，下一步</button>
+      <button wx:else class="primary" style="width: 100%;" bindtap="finish" hover-class="pressed">看看现在的感觉</button>
+      <button wx:if="{{!last}}" class="secondary" style="width: 100%;" bindtap="finish">现在结束并记录</button>
+    </block>
+    <button wx:else class="secondary" style="width: 100%;" bindtap="finish">结束普通练习</button>
+  </block>
+  <view wx:if="{{error}}" class="error">{{error}}<button class="link" bindtap="restore">重新读取</button></view>
+  <button class="link" bindtap="home">返回首页{{event && !event.safety ? '，稍后继续' : ''}}</button>
+  <view class="notice">本地预设支持 · 进度自动保存在此设备。</view>
+</view>

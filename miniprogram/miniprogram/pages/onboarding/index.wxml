@@ -1,0 +1,27 @@
+<view class="page compact-page onboarding-page">
+  <view class="progress" aria-label="第 {{step + 1}} 步，共 3 步"><view class="progress-line active"></view><view class="progress-line {{step >= 1 ? 'active' : ''}}"></view><view class="progress-line {{step >= 2 ? 'active' : ''}}"></view></view>
+  <view class="eyebrow">了解自己 · 第 {{step + 1}} / 3 步</view><view class="title">{{step === 0 ? '先聊聊你的习惯' : step === 1 ? '找到想改变的理由' : '按自己的节奏开始'}}</view>
+  
+  <block wx:if="{{ready}}">
+    <view wx:if="{{step === 0}}" class="stack form-grid">
+      <view><label class="field-label" for="daily">每天大约抽多少支？</label><input id="daily" class="field" type="number" value="{{form.cigarettesPerDay < 0 ? '' : form.cigarettesPerDay}}" data-field="cigarettesPerDay" bindinput="input" placeholder="0–200 支" /></view>
+      <view><label class="field-label" for="years">吸烟多少年？</label><input id="years" class="field" type="number" value="{{form.smokingYears < 0 ? '' : form.smokingYears}}" data-field="smokingYears" bindinput="input" placeholder="0–100 年" /></view>
+      <view><label class="field-label" for="first">起床后第一支（分钟）</label><input id="first" class="field" type="number" value="{{form.minutesToFirstCigarette < 0 ? '' : form.minutesToFirstCigarette}}" data-field="minutesToFirstCigarette" bindinput="input" placeholder="分钟，0–1440" /></view>
+      <view><label class="field-label" for="attempts">过去认真戒过几次？</label><input id="attempts" class="field" type="number" value="{{form.quitAttempts < 0 ? '' : form.quitAttempts}}" data-field="quitAttempts" bindinput="input" placeholder="0–100 次" /></view>
+    </view>
+    <view wx:elif="{{step === 1}}" class="section">
+      <view class="section-title">常见场景（选 1–3 个）</view>
+      <view class="options"><button wx:for="{{options}}" wx:key="value" class="option {{item.selected ? 'selected' : ''}}" data-value="{{item.value}}" bindtap="trigger" hover-class="pressed" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}">{{item.label}}</button></view>
+      <view class="section"><view class="row"><label class="field-label" for="motivation">你最想戒烟的原因是什么？</label><text class="muted">{{form.motivation.length}}/300</text></view><textarea id="motivation" class="field" value="{{form.motivation}}" data-field="motivation" bindinput="input" maxlength="300" placeholder="写下一个对你重要的理由" /></view>
+    </view>
+    <view wx:else class="stack form-grid">
+      <view class="wide-field"><view class="field-label">当前状态</view><picker range="{{statuses}}" range-key="label" value="{{statusIndex}}" bindchange="status"><view class="picker">{{statuses[statusIndex].label}}　⌄</view></picker></view>
+      <view class="wide-field"><view class="field-label">{{form.quitStatus === 'quit' ? '开始戒烟日期' : '计划戒烟日期（可稍后决定）'}}</view><picker mode="date" value="{{form.quitDate}}" data-field="quitDate" bindchange="input"><view class="picker">{{form.quitDate || '选择日期'}}　⌄</view></picker><button wx:if="{{form.quitDate}}" class="link" bindtap="clearDate">清除日期</button></view>
+      <view><label class="field-label" for="price">每包价格（元，可不填）</label><input id="price" class="field" type="digit" value="{{form.cigarettePackPrice}}" data-field="cigarettePackPrice" bindinput="input" placeholder="用于估算省下的烟钱" /></view>
+      <view><label class="field-label" for="pack">每包支数</label><input id="pack" class="field" type="number" value="{{form.cigarettesPerPack < 0 ? '' : form.cigarettesPerPack}}" data-field="cigarettesPerPack" bindinput="input" placeholder="1–200 支" /></view>
+    </view>
+  </block>
+  <view wx:if="{{error}}" class="error">{{error}}<button wx:if="{{!ready}}" class="link" bindtap="load">重新读取</button></view>
+  <view wx:if="{{ready}}" class="form-actions"><button wx:if="{{step > 0}}" class="secondary" bindtap="back">上一步</button><button wx:if="{{step < 2}}" class="primary" bindtap="next" hover-class="pressed">继续 →</button><button wx:else class="primary" bindtap="save" loading="{{saving}}" disabled="{{saving}}" hover-class="pressed">保存并开始</button></view>
+  <button class="link" bindtap="home">稍后再来</button>
+</view>

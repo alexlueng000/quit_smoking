@@ -1,0 +1,1 @@
+.page > .section { margin-top:24px; }.field[type="number"] { height:72px; font-size:28px; font-weight:500; color:#315e3e; padding:20px; }

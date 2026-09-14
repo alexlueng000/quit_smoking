@@ -1,0 +1,23 @@
+.intervention-page .instruction { font-size: 16px; line-height: 1.7; color: #435e4a; margin-top: 12px; }
+.intervention-page .timer { margin: 18px 0 14px; text-align: center; }
+.timer-face { width: 152px; height: 152px; margin: 0 auto 10px; border-radius: 50%; border: 1px solid #bdcdb5; padding: 7px; }
+.timer-inner { width: 100%; height: 100%; border: 1px solid #d8e1ce; background: #eaf0e3; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.clock { font-size: 40px; line-height: 1.2; color: #315e3e; font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
+.timer-caption { font-size: 11px; color: #61795c; letter-spacing: 1px; margin-top: 6px; }
+.intervention-page .timer .muted { font-size: 12px; }
+.intervention-page .primary { margin: 12px 0 0; }
+.intervention-page .secondary { min-height: 44px; padding: 9px 12px; margin: 8px 0 0; }
+.intervention-page .notice { margin-top: 6px; padding-top: 8px; text-align: center; font-size: 11px; }
+@media (max-height: 700px) {
+  .intervention-page .instruction { margin-top: 8px; font-size: 15px; line-height: 1.6; }
+  .intervention-page .timer { margin: 12px 0 10px; }
+  .intervention-page .timer-face { width: 112px; height: 112px; margin-bottom: 8px; padding: 5px; }
+  .intervention-page .clock { font-size: 32px; }
+  .intervention-page .timer-caption { margin-top: 4px; font-size: 10px; }
+}
+@media (max-height: 600px) {
+  .intervention-page .timer { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .intervention-page .timer-face { width: 88px; height: 88px; margin: 0; flex-shrink: 0; }
+  .intervention-page .timer .muted { max-width: 144px; text-align: left; }
+  .intervention-page .timer-caption { font-size: 9px; letter-spacing: 0; }
+}

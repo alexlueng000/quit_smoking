@@ -1,0 +1,28 @@
+<view class="page home">
+  <view class="row masthead">
+    <view class="brand"><view class="brand-mark" aria-hidden="true"><view class="leaf"></view></view><view class="brand-text"><view class="brand-name">戒烟伙伴</view><view class="brand-caption">陪你，把这一刻过好</view></view></view>
+    <button class="settings-button" style="width: 44px; margin: 0;" bindtap="settings" hover-class="pressed" aria-label="设置"><view class="settings-glyph" aria-hidden="true"><view></view><view></view></view></button>
+  </view>
+  <view wx:if="{{error}}" class="error">{{error}}<button class="link" bindtap="refresh">重新读取</button></view>
+  <block wx:if="{{ready}}">
+    <view class="hero">
+
+      <view class="hero-title">{{summary.profile ? '想抽烟？先停两分钟。' : '慢慢来，从这一次选择开始。'}}</view>
+      <view class="hero-copy">{{summary.profile ? '不急着做决定。先陪自己，等这一阵过去。' : '了解自己的习惯，找到适合你的节奏。每一步，都算数。'}}</view>
+      <button class="primary row" style="width: 100%;" bindtap="start" hover-class="pressed"><text>{{!summary.profile ? '建立我的戒烟档案' : summary.activeId ? '继续上次支持' : '开始缓解烟瘾'}}</text><text class="action-arrow" aria-hidden="true">→</text></button>
+
+    </view>
+    <block wx:if="{{summary.profile}}">
+      <view class="row plan"><view><view class="plan-status">{{summary.statusText}}</view><view wx:if="{{summary.profile.quitStatus === 'quit'}}" class="muted">已经离烟 {{summary.days}} 天</view></view><button class="link" style="width: auto; margin: 0;" bindtap="plan">调整计划 <text aria-hidden="true">↗</text></button></view>
+      <view class="stats"><view><text class="stat">{{summary.todayCount}}</text><text>今日烟瘾</text></view><view><text class="stat">{{summary.survivedCount}}</text><text>累计未抽烟</text></view><view><text class="stat money">{{summary.savings === '—' ? '—' : '¥' + summary.savings}}</text><text>预计省下</text></view></view>
+      <view class="savings-hint" wx:if="{{summary.savings === '—'}}">补充戒烟日期和烟价，可估算省下的烟钱。</view>
+      <button class="checkin row" style="width: 100%;" bindtap="checkin" hover-class="pressed"><view class="checkin-content"><view class="checkin-icon" aria-hidden="true">{{summary.checkedIn ? '✓' : '＋'}}</view><view><view class="checkin-title">{{summary.checkedIn ? '今天已记录' : '记录今天'}}</view><view class="muted">{{summary.checkedIn ? '还可以补充或修改' : '简单回顾，不评判'}}</view></view></view><text class="checkin-arrow" aria-hidden="true">→</text></button>
+      <button class="trend-toggle row" style="width: 100%;" bindtap="toggleTrend" hover-class="pressed" aria-label="{{showTrend ? '收起近七天烟瘾趋势' : '展开近七天烟瘾趋势'}}"><text>近 7 天烟瘾趋势</text><text class="muted">{{showTrend ? '收起 ↑' : '查看 ↓'}}</text></button><view wx:if="{{showTrend}}" class="trend-section"><view class="row"><view class="section-title">一点点，看见变化</view><view class="period">近 7 天</view></view><view class="muted">烟瘾平均强度 · 0–10</view>
+        <view wx:if="{{summary.hasTrend}}" class="chart"><view wx:for="{{summary.trend}}" wx:key="date" class="column"><text>{{item.value}}</text><view class="bar {{item.current ? 'current' : ''}}" style="height: {{item.height}}px"></view><text>{{item.label}}</text></view></view>
+        <view wx:else class="empty"><view class="empty-line" aria-hidden="true"></view><view>第一条记录，就是起点。</view><view class="muted">记录后，你的变化会慢慢出现在这里。</view></view>
+      </view>
+    </block>
+    <view class="notice"><text class="local-label">本地体验</text>记录仅存此设备 · 使用预设支持步骤</view>
+  </block>
+
+</view>

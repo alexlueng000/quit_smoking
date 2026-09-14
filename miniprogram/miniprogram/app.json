@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/onboarding/index",
+    "pages/craving-start/index",
+    "pages/intervention/index",
+    "pages/result/index",
+    "pages/daily-checkin/index",
+    "pages/settings/index",
+    "pages/privacy/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "戒烟伙伴",
+    "navigationBarBackgroundColor": "#f2f5f0",
+    "backgroundColor": "#f2f5f0"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents"
+}
