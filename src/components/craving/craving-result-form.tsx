@@ -93,7 +93,7 @@ export function CravingResultForm({ eventId }: { eventId: string }) {
       {outcome && (
         <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
           <label className="font-semibold" htmlFor="feedback">{outcome === "not_smoked" ? "刚才什么最有帮助？" : outcome === "smoked" ? "没关系。最后促使你点烟的是什么？" : "你现在还需要什么？"}</label>
-          <textarea id="feedback" className="mt-3 min-h-20 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-blue-700 outline-none focus:border-emerald-600" maxLength={300} value={feedback} onChange={(event) => setFeedback(event.target.value)} />
+          <textarea id="feedback" className="mt-3 min-h-20 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-[var(--ink)] outline-none focus:border-emerald-600" maxLength={300} value={feedback} onChange={(event) => setFeedback(event.target.value)} />
         </section>
       )}
 

@@ -75,7 +75,7 @@ export function InterventionSession({ eventId }: { eventId: string }) {
       {intervention?.followup_question && stepIndex < 5 && (
         <section className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
           <label className="font-semibold" htmlFor="reply">{intervention.followup_question}</label>
-          <textarea id="reply" className="mt-3 min-h-20 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-blue-700 outline-none focus:border-emerald-600" maxLength={300} value={userMessage} onChange={(event) => setUserMessage(event.target.value)} />
+          <textarea id="reply" className="mt-3 min-h-20 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-[var(--ink)] outline-none focus:border-emerald-600" maxLength={300} value={userMessage} onChange={(event) => setUserMessage(event.target.value)} />
           <button className="mt-3 w-full rounded-xl bg-slate-900 px-4 py-3 font-semibold text-white disabled:opacity-50" type="button" disabled={loading} onClick={() => void requestStep(stepIndex, userMessage || null)}>{loading ? "正在回应…" : "继续"}</button>
         </section>
       )}

@@ -74,13 +74,13 @@ export function DailyCheckinForm() {
           </div>
           <span className="rounded-lg bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-800">必填</span>
         </div>
-        <input id="cigarettes" className="mt-5 w-full rounded-xl border border-slate-300 px-4 py-4 text-3xl font-bold text-blue-700 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100" type="number" min="0" max="200" required value={cigarettesSmoked} onChange={(event) => setCigarettesSmoked(Number(event.target.value))} />
+        <input id="cigarettes" className="mt-5 w-full rounded-xl border border-slate-300 px-4 py-4 text-3xl font-bold text-[var(--ink)] outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100" type="number" min="0" max="200" required value={cigarettesSmoked} onChange={(event) => setCigarettesSmoked(Number(event.target.value))} />
       </section>
 
       <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <label className="font-bold" htmlFor="notes">今天最难的一次是什么时候？</label>
         <span className="ml-2 text-xs text-slate-400">可不填</span>
-        <textarea id="notes" className="mt-4 min-h-28 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-blue-700 outline-none focus:border-emerald-600" maxLength={500} placeholder="例如：晚饭后和朋友聊天时" value={notes} onChange={(event) => setNotes(event.target.value)} />
+        <textarea id="notes" className="mt-4 min-h-28 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-[var(--ink)] outline-none focus:border-emerald-600" maxLength={500} placeholder="例如：晚饭后和朋友聊天时" value={notes} onChange={(event) => setNotes(event.target.value)} />
         <p className="mt-1 text-right text-xs text-slate-400">{notes.length}/500</p>
       </section>
 

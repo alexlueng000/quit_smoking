@@ -34,7 +34,7 @@ const initialForm: ProfileInput = {
 };
 
 const inputClass =
-  "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-blue-700 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100";
+  "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100";
 
 export function OnboardingForm() {
   const router = useRouter();

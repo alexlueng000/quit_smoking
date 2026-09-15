@@ -73,7 +73,7 @@ export function CravingStartForm() {
 
       <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <label className="text-sm font-semibold" htmlFor="context">刚才发生了什么？<span className="ml-2 font-normal text-slate-400">可不填</span></label>
-        <textarea id="context" className="mt-3 min-h-24 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-blue-700 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100" maxLength={300} value={context} onChange={(event) => setContext(event.target.value)} placeholder="例如：刚开完一个很不顺利的会议" />
+        <textarea id="context" className="mt-3 min-h-24 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-[var(--ink)] outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100" maxLength={300} value={context} onChange={(event) => setContext(event.target.value)} placeholder="例如：刚开完一个很不顺利的会议" />
         <p className="mt-1 text-right text-xs text-slate-400">{context.length}/300</p>
       </section>
 
